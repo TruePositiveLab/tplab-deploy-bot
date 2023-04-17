@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "tp-deploy-bot"
+version = "0.1.0"
+description = ""
+authors = ["Vladislav Bortnikov <bortnikov.vladislav@e-sakha.ru>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+semver = "^3.0.0"
+PyGithub = "^1.58.1"
+dohq-teamcity = "^1.0.8"
+python-dotenv = "^1.0.0"
+pyTelegramBotAPI= "^4.9.0"
+
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,5 @@
+dohq-teamcity==1.0.8
+PyGithub==1.54
+pyTelegramBotAPI==4.9.0
+python-dotenv==0.19.2
+semver==2.13.0
