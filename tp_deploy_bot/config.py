@@ -1,3 +1,4 @@
+import ast
 import os
 from dotenv import load_dotenv
 from github import Github
@@ -6,6 +7,15 @@ from dohq_teamcity import TeamCity
 load_dotenv()
 
 env = os.environ
+
+
+def boolean_env(key, default=False):
+    val = env.get(key, "True" if default else "False")
+    try:
+        return ast.literal_eval(val)
+    except:  # noqa
+        return default
+
 
 TARGET_SERVER = env["DEPLOY_TARGET_SERVER"]
 # Teamcity conf
@@ -20,7 +30,7 @@ TEAMCITY_MAX_REQUEST_COUNT = 30
 # Github conf
 GITHUB = Github(env["DEPLOY_GITHUB_ACCESS_TOKEN"])
 GITHUB_REPO = env["DEPLOY_GITHUB_REPO"]
-IS_PRERELEASE = env.get("IS_PRERELEASE", "false") == "true"
+IS_PRERELEASE = boolean_env("IS_PRERELEASE")
 
 # Telegram notifications conf
 TG_BOT_TOKEN = env["TG_BOT_TOKEN"]
