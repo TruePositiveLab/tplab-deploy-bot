@@ -20,7 +20,7 @@ TEAMCITY_MAX_REQUEST_COUNT = 30
 # Github conf
 GITHUB = Github(env["DEPLOY_GITHUB_ACCESS_TOKEN"])
 GITHUB_REPO = env["DEPLOY_GITHUB_REPO"]
-IS_PRERELEASE = env.get("IS_PRERELEASE", "False").lower() in ("true", "1", "t")
+IS_PRERELEASE = env.get("IS_PRERELEASE", "false") == "true"
 
 # Telegram notifications conf
 TG_BOT_TOKEN = env["TG_BOT_TOKEN"]
