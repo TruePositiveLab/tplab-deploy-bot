@@ -52,8 +52,8 @@ def get_latest_release(github, repo_name, prerelease=False) -> SemVer:
             break
     if release_body == "":
         release_body = "Ошибка поиска последней доступной версии, ничего не найдено!"
-    send_tg_bot_message(release_body)
-    return latest_release
+
+    return latest_release, release_body
 
 
 @backoff.on_exception(backoff.expo,

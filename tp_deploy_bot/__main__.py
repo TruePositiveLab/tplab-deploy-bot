@@ -16,13 +16,13 @@ def main():
     print(f"{TARGET_SERVER} version is {server_version}")
     is_prerelease = bool(server_version.prerelease)
     print(f"Prerelease status: {is_prerelease}")
-    new_version = get_latest_release(GITHUB, GITHUB_REPO, prerelease=IS_PRERELEASE)
+    new_version, release_body = get_latest_release(GITHUB, GITHUB_REPO, prerelease=IS_PRERELEASE)
     print(f"Latest github release version: {new_version}")
 
     if new_version <= server_version:
-        send_tg_bot_message(f"Версия на сервере {TARGET_SERVER} = {server_version} является самой актуальной")
+        send_tg_bot_message(f"Версия {server_version} на сервере {TARGET_SERVER} является актуальной")
         sys.exit(0)
-
+    send_tg_bot_message(release_body)
     queue_deploy(TEAMCITY, TEAMCITY_BUILD_CONF_ID, TARGET_SERVER, new_version)
 
 
