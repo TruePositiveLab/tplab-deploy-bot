@@ -90,17 +90,17 @@ def queue_deploy(teamcity, conf_id, target_server, tag):
             ]
         },
     }
-    pre_launch_message = f"Запуск обновления {tag} для сервера {target_server}"
-    send_tg_bot_message(pre_launch_message)
     response = start_new_build(teamcity, build)
+    pre_launch_message = (f"Запуск обновления {tag} для сервера {target_server}" \
+                          f"\nсм. подробности по {response.web_url}")
+    send_tg_bot_message(pre_launch_message)
     build_id = response.id
     response = wait_for_build_end(teamcity, build_id)
 
-    tg_url = mlink("ссылке", url=response.web_url, escape=False)
     response_message = (
         f"[BUILD:{build_id}]\nСборка обновления {tag} для сервера {target_server} окончилась"
         f"\nстатус: {response.status_text}"
-        f"\nсм. подробности по {tg_url}"
+        f"\nсм. подробности по {response.web_url}"
     )
     send_tg_bot_message(response_message)
 

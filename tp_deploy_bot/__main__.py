@@ -8,7 +8,7 @@ from tp_deploy_bot.config import (
     GITHUB_REPO,
     IS_PRERELEASE,
 )
-from tp_deploy_bot.utils import get_server_version, get_latest_release, queue_deploy
+from tp_deploy_bot.utils import get_server_version, get_latest_release, queue_deploy, send_tg_bot_message
 
 
 def main():
@@ -19,9 +19,9 @@ def main():
     new_version = get_latest_release(GITHUB, GITHUB_REPO, prerelease=IS_PRERELEASE)
     print(f"Latest github release version: {new_version}")
 
-    # if new_version <= server_version:
-    #     print("New version is the same as server_version or older")
-    #     sys.exit(0)
+    if new_version <= server_version:
+        send_tg_bot_message(f"Версия на сервере {TARGET_SERVER} = {server_version} является самой актуальной")
+        sys.exit(0)
 
     queue_deploy(TEAMCITY, TEAMCITY_BUILD_CONF_ID, TARGET_SERVER, new_version)
 
