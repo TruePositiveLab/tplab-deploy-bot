@@ -11,6 +11,7 @@ PyGithub = "^1.58.1"
 dohq-teamcity = "^1.0.8"
 python-dotenv = "^1.0.0"
 pyTelegramBotAPI= "^4.9.0"
+backoff = "^2.2.1"
 
 
 [tool.poetry.dev-dependencies]
