@@ -14,3 +14,4 @@ services:
          DEPLOY_TEAMCITY_BUILD_CONF:
          TG_BOT_TOKEN:
          TG_BOT_CHAT_ID:
+         RETAILROTOR_REGISTRY_URL:
