@@ -17,6 +17,8 @@ def boolean_env(key, default=False):
         return default
 
 
+RETAILROTOR_REGISTRY_URL = env["RETAILROTOR_REGISTRY_URL"]
+
 TARGET_SERVER = env["DEPLOY_TARGET_SERVER"]
 # Teamcity conf
 TEAMCITY = TeamCity(

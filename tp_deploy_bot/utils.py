@@ -6,13 +6,13 @@ from semver import Version as SemVer
 import requests
 import re
 import telebot
-from telebot.formatting import mbold, mlink, escape_markdown
+from telebot.formatting import escape_markdown
 
 from tp_deploy_bot.config import (
     TG_BOT_TOKEN,
     TG_BOT_CHAT_ID,
     TEAMCITY_STATUS_TEXT,
-    TEAMCITY_MAX_REQUEST_COUNT,
+    TEAMCITY_MAX_REQUEST_COUNT, RETAILROTOR_REGISTRY_URL,
 )
 
 VERSION_RE = re.compile(
@@ -109,3 +109,11 @@ def send_tg_bot_message(message: str):
     bot = telebot.TeleBot(TG_BOT_TOKEN)
     message = escape_markdown(message)
     bot.send_message(TG_BOT_CHAT_ID, message, parse_mode="MarkdownV2")
+
+
+def check_image_on_registry(release_tag):
+    registry_url = RETAILROTOR_REGISTRY_URL
+    response = requests.get(registry_url, verify=False)
+    response.raise_for_status()
+    tags = response.json()['tags']
+    return str(release_tag) in tags

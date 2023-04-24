@@ -8,7 +8,13 @@ from tp_deploy_bot.config import (
     GITHUB_REPO,
     IS_PRERELEASE,
 )
-from tp_deploy_bot.utils import get_server_version, get_latest_release, queue_deploy, send_tg_bot_message
+from tp_deploy_bot.utils import (
+    get_server_version,
+    get_latest_release,
+    queue_deploy,
+    send_tg_bot_message,
+    check_image_on_registry
+)
 
 
 def main():
@@ -23,6 +29,9 @@ def main():
         send_tg_bot_message(f"Версия {server_version} на сервере {TARGET_SERVER} является актуальной")
         sys.exit(0)
     send_tg_bot_message(release_body)
+    if not check_image_on_registry(new_version):
+        send_tg_bot_message(f"Образа для тега {new_version} отсутствует в registry")
+        sys.exit(0)
     queue_deploy(TEAMCITY, TEAMCITY_BUILD_CONF_ID, TARGET_SERVER, new_version)
 
 
