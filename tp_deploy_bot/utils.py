@@ -16,7 +16,7 @@ from tp_deploy_bot.config import (
 )
 
 VERSION_RE = re.compile(
-    r"<title>RetailRotor (\d+[.]\d[.]\d(-rc\d)?)</title>", re.MULTILINE
+    r"<title>RetailRotor (\d+[.]\d[.]\d(-rc\d{1,3})?)</title>", re.MULTILINE
 )
 
 
