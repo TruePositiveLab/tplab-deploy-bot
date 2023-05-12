@@ -2,6 +2,7 @@ import time
 
 import backoff as backoff
 import dohq_teamcity
+from requests.auth import HTTPBasicAuth
 from semver import Version as SemVer
 import requests
 import re
@@ -13,6 +14,8 @@ from tp_deploy_bot.config import (
     TG_BOT_CHAT_ID,
     TEAMCITY_STATUS_TEXT,
     TEAMCITY_MAX_REQUEST_COUNT, RETAILROTOR_REGISTRY_URL,
+    REGISTRY_PASSWORD,
+    REGISTRY_LOGIN
 )
 
 VERSION_RE = re.compile(
@@ -113,7 +116,7 @@ def send_tg_bot_message(message: str):
 
 def check_image_on_registry(release_tag):
     registry_url = RETAILROTOR_REGISTRY_URL
-    response = requests.get(registry_url, verify=False)
+    response = requests.get(registry_url, verify=False, auth=HTTPBasicAuth(REGISTRY_LOGIN, REGISTRY_PASSWORD))
     response.raise_for_status()
     tags = response.json()['tags']
     return str(release_tag) in tags

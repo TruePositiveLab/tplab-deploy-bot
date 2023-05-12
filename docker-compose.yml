@@ -15,3 +15,5 @@ services:
          TG_BOT_TOKEN:
          TG_BOT_CHAT_ID:
          RETAILROTOR_REGISTRY_URL:
+         REGISTRY_PASSWORD:
+         REGISTRY_LOGIN:
