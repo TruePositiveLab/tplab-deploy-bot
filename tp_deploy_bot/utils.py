@@ -29,7 +29,8 @@ def teamcity_exception_handler(func):
             func(*args, **kwargs)
         except dohq_teamcity.ApiException as exc:
             send_tg_bot_message(f"Ошибка подключения к API Teamcity\n{exc.body}")
-
+        except Exception as exc:
+            send_tg_bot_message(f"Неизвестная ошибка\n{exc}")
     return inner_function
 
 
