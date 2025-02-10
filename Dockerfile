@@ -17,7 +17,7 @@ ARG APPDIR=/app
 WORKDIR $APPDIR/
 COPY tp_deploy_bot ./tp_deploy_bot
 COPY pyproject.toml ./pyproject.toml
-RUN $VENV_PATH/bin/poetry install --no-dev
+RUN $VENV_PATH/bin/poetry install
 
 FROM app-base as main
 
